@@ -43,6 +43,25 @@ class BabelGenerator
     end
   end
 
+  # The curated vault: short recovered texts at the first addresses, so a
+  # phrase search from the front of the library has guaranteed, immediate
+  # hits for a demo. Still deterministic; still nothing stored.
+  VAULT = {
+    "1" => "In the infinite library, every book is the answer to every question, and every answer is another question.",
+    "2" => "The library is a sphere whose exact center is any hexagon and whose circumference is inaccessible.",
+    "3" => "A single book can be meaningless, but a shelf, a hexagon, a universe of books cannot be."
+  }.freeze
+
+  def self.vault?(hex)
+    VAULT.key?(hex)
+  end
+
+  def self.vault_page(hex)
+    text = VAULT.fetch(hex)
+    words = [ text ] + new(hex).words
+    words.join(" ")[0, PAGE_LENGTH].ljust(PAGE_LENGTH)
+  end
+
   def words
     page.split
   end
