@@ -27,7 +27,7 @@ class BooksIntegrationTest < ActionDispatch::IntegrationTest
   test "random redirects to a book address" do
     get "/books/random"
     assert_response :redirect
-    assert_match %r{\A/books/[0-9a-f]+\z}, response.headers["Location"]
+    assert_match %r{\Ahttps?://www\.example\.com/books/[0-9a-f]+\z}, response.headers["Location"]
   end
 
   test "search finds the vault phrase and redirects to its book" do
@@ -51,7 +51,7 @@ class BooksIntegrationTest < ActionDispatch::IntegrationTest
   test "home page shows the first book and the doors into the library" do
     get "/"
     assert_response :success
-    assert_select "a[href=/books/random]"
-    assert_select "a[href=/books/search]"
+    assert_select "a[href='/books/random']"
+    assert_select "a[href='/books/search']"
   end
 end
