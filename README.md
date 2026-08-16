@@ -1,45 +1,47 @@
-<!-- foundation:identity -->
-# Infinite Babel
+# The Infinite Library of Babel
 
-A deterministic infinite library in the style of libraryofbabel.info: every hex address maps to a stable, generated 4100-character page. No page content is ever stored the address is the only datum th
+A deterministic infinite library in the spirit of
+[libraryofbabel.info](https://libraryofbabel.info). Every hex address is a
+book: a 4,100-character page is derived from the address alone. **Nothing is
+ever stored** — the address is the only datum, and the same address yields
+the same page on every machine, forever.
 
-- Site: https://infinite-babel.api.holode.xyz
-- Support: support@infinite-babel.api.holode.xyz
-<!-- /foundation:identity -->
+## What you get
 
-## What this is
+- **Read any book** — open `/books/<hex>` and the page is generated on
+  demand. Any hex string is valid; the library is total.
+- **Navigate** — every book has a neighbor in both directions (hex address
+  ± 1), plus a random door into the stacks.
+- **Search** — a bounded deterministic scan forward from an address finds
+  the first book containing a phrase. Hits redirect to their stable address.
+- **A curated vault** — addresses `1`, `2`, and `3` carry recovered texts,
+  so phrase-search demos land instantly.
 
-A deterministic infinite library in the style of libraryofbabel.info: every hex address maps to a stable, generated 4100-character page. No page content is ever stored — the address is the only datum; the page is derived from it on every read.
+## How it works
 
-## Who it is for
+`app/services/babel_generator.rb` turns a hex address into a deterministic
+stream of characters via a splitmix64 PRNG seeded from the address. Pages are
+exactly 4,100 characters, like the original library. `app/models/book.rb`
+adds the locator address (`<hex>.1.wall1.shelf1.volume1`), adjacency in hex
+space, and the bounded search. No database rows are involved in reading a
+book; the app boots and serves the entire library with an empty database.
 
-- visitor
-
-## Main features
-
-- **View a page by address** — open /books/:hex and receive the generated 4100-character page with its address shown
-- **Navigate neighbors** — previous/next links move through hex address +/- 1; any address is valid
-- **Random page** — generates a random hex address and redirects to its page
-- **Search the library** — bounded deterministic scan from a start address for an exact phrase; returns the first page containing it or reports not found in the scanned window
-
-## Core entities
-
-- Page
-
-## Run locally
+## Run it
 
 ```bash
-bundle install
-bin/rails db:prepare
-bin/dev
+bin/setup
+bin/rails server
 ```
 
-Requires Ruby, PostgreSQL, and the usual Rails toolchain. See `bin/setup` if present.
+Open http://localhost:3000 — you're in the library.
 
-## Demo
+## Deploy
 
-Nothing to seed — the library generates itself from addresses. A small curated vault of recovered texts at low addresses (e.g. 1, 2, 3) makes phrase-search demos land instantly.
+This repo is public and forkable. Point it at any Rails host (the
+foundation's Kamal config lives in `config/deploy.yml`); the live preview
+at `<slug>.demo.holode.xyz` wipes daily at 3AM Mexico City — the repo is the
+keeper.
 
-## Deploy notes
+## License
 
-Production `config.hosts` is derived from `domain` in `config/foundation.yml`. Keep that value aligned with the real host or every request will 403.
+MIT — see [LICENSE](LICENSE).
