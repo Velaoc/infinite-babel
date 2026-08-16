@@ -1,0 +1,27 @@
+<% title "Search the Library — Infinite Babel" %>
+<% description "Find the first book, at or after an address, that contains a phrase." %>
+
+<section class="md-section" aria-labelledby="search-title">
+  <div class="md-section__inner babel-search">
+    <p class="md-section__eyebrow">Infinite Babel</p>
+    <h1 id="search-title" class="md-section__heading">Search the library</h1>
+    <p>
+      Search walks forward from an address, regenerating pages as it goes,
+      and takes you to the first one that contains your phrase. The window is
+      bounded — the full library is infinite, after all.
+    </p>
+
+    <%= form_with url: search_books_path, method: :get, class: "babel-search__form" do |form| %>
+      <%= form.text_field :q, value: @phrase, placeholder: "a phrase, e.g. the cat sat", class: "md-text-field", autofocus: true, aria: { label: "Phrase to search for" } %>
+      <%= form.submit "Search", class: "md-button md-button--filled" %>
+    <% end %>
+
+    <% if @phrase && @results.nil? %>
+      <p class="babel-search__empty" role="status">
+        No book in the first <%= @window %> addresses from <code>1</code>
+        contains “<%= @phrase %>”. The library is infinite — try another
+        phrase, or a different starting address.
+      </p>
+    <% end %>
+  </div>
+</section>
