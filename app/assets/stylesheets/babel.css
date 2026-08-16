@@ -1,0 +1,90 @@
+/* Infinite Babel — product layer on top of Material Design 3 tokens.
+   The reading page is the whole point: give it a book's typography and
+   let the chrome recede. Colors come from MD3 variables only. */
+
+.babel-hero .md-hero__art {
+  background:
+    radial-gradient(circle at 30% 30%, color-mix(in srgb, var(--md-sys-color-primary) 22%, transparent), transparent 60%),
+    radial-gradient(circle at 70% 70%, color-mix(in srgb, var(--md-sys-color-tertiary) 18%, transparent), transparent 55%);
+}
+
+.babel-page {
+  margin-top: 1.5rem;
+}
+
+.babel-page__text {
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  text-align: justify;
+  hyphens: auto;
+  max-width: 46rem;
+  margin: 0 auto;
+  color: var(--md-sys-color-on-surface);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.babel-book__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.babel-book__address {
+  font-size: 0.9rem;
+  color: var(--md-sys-color-on-surface-variant);
+  margin: 0.25rem 0 0;
+}
+
+.babel-book__locator {
+  font-size: 0.8rem;
+  color: var(--md-sys-color-outline);
+}
+
+.babel-book__actions {
+  flex-shrink: 0;
+}
+
+.babel-book__nav {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  justify-content: center;
+}
+
+.babel-book__note {
+  max-width: 46rem;
+  margin: 1.5rem auto 0;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.babel-search__form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  margin-top: 1.5rem;
+  max-width: 40rem;
+}
+
+.babel-search__form .md-text-field {
+  flex: 1 1 18rem;
+}
+
+.babel-search__empty {
+  margin-top: 1.5rem;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+@media (max-width: 599px) {
+  .babel-page__text {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+}
