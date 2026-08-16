@@ -12,15 +12,18 @@
     </p>
 
     <%= form_with url: search_books_path, method: :get, class: "babel-search__form" do |form| %>
-      <%= form.text_field :q, value: @phrase, placeholder: "a phrase, e.g. the cat sat", class: "md-text-field", autofocus: true, aria: { label: "Phrase to search for" } %>
+      <label class="md-field babel-search__field">
+        <span class="md-field__label">Phrase</span>
+        <%= form.text_field :q, value: @phrase, class: "md-field__input", autofocus: true, placeholder: "e.g. the exact center", autocomplete: "off" %>
+      </label>
       <%= form.submit "Search", class: "md-button md-button--filled" %>
     <% end %>
 
-    <% if @phrase && @results.nil? %>
+    <% if @phrase && @start %>
       <p class="babel-search__empty" role="status">
-        No book in the first <%= @window %> addresses from <code>1</code>
+        No book in the first <%= @window %> addresses from <code><%= @start %></code>
         contains “<%= @phrase %>”. The library is infinite — try another
-        phrase, or a different starting address.
+        phrase, or start from a different address.
       </p>
     <% end %>
   </div>
