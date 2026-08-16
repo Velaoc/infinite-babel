@@ -1,0 +1,38 @@
+{
+  "name": "Infinite Babel",
+  "purpose": "A deterministic infinite library in the style of libraryofbabel.info: every hex address maps to a stable, generated 4100-character page. No page content is ever stored — the address is the only datum; the page is derived from it on every read.",
+  "actors": [
+    "visitor"
+  ],
+  "entities": [
+    {
+      "name": "Page",
+      "relationships": [
+        "has exactly one canonical hex address",
+        "content is derived deterministically from the address (never stored)",
+        "adjacent pages are hex address +/- 1"
+      ]
+    }
+  ],
+  "workflows": [
+    {
+      "name": "View a page by address",
+      "description": "open /books/:hex and receive the generated 4100-character page with its address shown"
+    },
+    {
+      "name": "Navigate neighbors",
+      "description": "previous/next links move through hex address +/- 1; any address is valid"
+    },
+    {
+      "name": "Random page",
+      "description": "generates a random hex address and redirects to its page"
+    },
+    {
+      "name": "Search the library",
+      "description": "bounded deterministic scan from a start address for an exact phrase; returns the first page containing it or reports not found in the scanned window"
+    }
+  ],
+  "modules": [],
+  "integrations": [],
+  "seed_demo": "Nothing to seed — the library generates itself from addresses. A small curated vault of recovered texts at low addresses (e.g. 1, 2, 3) makes phrase-search demos land instantly."
+}
