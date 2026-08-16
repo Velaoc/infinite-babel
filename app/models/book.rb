@@ -29,7 +29,11 @@ class Book
   end
 
   def page
-    BabelGenerator.page(hex)
+    if BabelGenerator.vault?(hex)
+      BabelGenerator.vault_page(hex)
+    else
+      BabelGenerator.page(hex)
+    end
   end
 
   def previous
