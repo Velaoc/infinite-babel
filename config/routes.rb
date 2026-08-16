@@ -135,5 +135,5 @@ Rails.application.routes.draw do
   get "books/search", to: "books#search", as: :search_books
   get "books/:hex", to: "books#show", as: :book, constraints: { hex: /[0-9a-f]+/ }
 
-  root "home#show"
+  root "foundation/home#show"
 end
