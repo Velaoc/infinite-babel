@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class BooksController < ApplicationController
-  before_action :set_book, only: :show
-
   def show
     @book = Book.new(params[:hex])
   end
@@ -12,8 +10,9 @@ class BooksController < ApplicationController
     redirect_to book_path(Book.random.hex)
   end
 
-  # Bounded deterministic phrase search. A found book is a redirect to its
-  # address — one stable URL per hit, nothing stored.
+  # Bounded deterministic phrase search. A hit redirects to the first book
+  # in the window that contains the phrase — one stable URL per finding,
+  # and nothing is ever stored.
   def search
     phrase = params[:q].to_s.strip
     if phrase.empty?
@@ -23,13 +22,12 @@ class BooksController < ApplicationController
 
     @phrase = phrase
     @window = Book::SEARCH_WINDOW
-    @results = Book.first_containing(phrase).present? ? [ Book.first_containing(phrase) ] : []
-    render :search
-  end
-
-  private
-
-  def set_book
-    @book = Book.new(params[:hex])
+    hit = Book.first_containing(phrase)
+    if hit
+      redirect_to book_path(hit.hex)
+    else
+      @start = Book.new(Book::DEFAULT_SHELF).hex
+      render :search
+    end
   end
 end
