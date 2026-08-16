@@ -18,8 +18,8 @@ shared:
   brand_seed_color: "#6750A4"
 
   # Fallbacks for pages that do not set their own title/description.
-  default_page_title: "Welcome"
-  default_page_description: "A deterministic infinite library in the style of libraryofbabel.info: every hex address maps to a stable, generated 4100-character page. No page content is ever stored the address is the only datum th"
+  default_page_title: "The Infinite Library of Babel"
+  default_page_description: "A deterministic infinite library: every hex address maps to a stable, generated 4,100-character page. Nothing is stored — the address is the only datum."
 
   # Absolute URL of the default Open Graph / social sharing image.
   # Blank omits the og:image tag.
