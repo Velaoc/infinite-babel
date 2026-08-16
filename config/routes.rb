@@ -130,6 +130,10 @@ Rails.application.routes.draw do
     get "session", to: "sessions#show", as: :session
   end
 
-  # Minimal landing page until the M7 marketing set replaces it.
-    root "foundation/home#show"
+  # The infinite library: any hex address is a valid book; nothing is stored.
+  get "books/random", to: "books#random", as: :random_book
+  get "books/search", to: "books#search", as: :search_books
+  get "books/:hex", to: "books#show", as: :book, constraints: { hex: /[0-9a-f]+/ }
+
+  root "home#show"
 end
