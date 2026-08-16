@@ -1,4 +1,5 @@
-# The Infinite Library of Babel
+<!-- foundation:identity -->
+# Infinite Babel
 
 A deterministic infinite library in the spirit of
 [libraryofbabel.info](https://libraryofbabel.info). Every hex address is a
@@ -45,3 +46,4 @@ keeper.
 ## License
 
 MIT — see [LICENSE](LICENSE).
+<!-- /foundation:identity -->
