@@ -33,7 +33,7 @@ class BooksIntegrationTest < ActionDispatch::IntegrationTest
   test "search finds the vault phrase and redirects to its book" do
     get "/books/search", params: { q: "sphere whose exact center" }
     assert_response :redirect
-    assert_equal "/books/2", response.headers["Location"]
+    assert_match %r{/books/2\z}, response.headers["Location"]
   end
 
   test "search with no match renders the empty state" do
