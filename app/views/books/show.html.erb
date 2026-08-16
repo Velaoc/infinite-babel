@@ -1,0 +1,38 @@
+<% title "Book #{@book.hex_short} — Infinite Babel" %>
+<% description "A 4,100-character page generated deterministically from its address." %>
+
+<section class="md-section" aria-labelledby="book-title">
+  <div class="md-section__inner babel-book">
+    <header class="babel-book__header">
+      <div>
+        <p class="md-section__eyebrow">Infinite Babel</p>
+        <h1 id="book-title">Volume</h1>
+        <p class="babel-book__address" title="<%= @book.address %>">
+          <code><%= @book.hex %></code><br>
+          <span class="babel-book__locator"><%= @book.address %></span>
+        </p>
+      </div>
+      <div class="md-actions babel-book__actions">
+        <%= link_to "Random", random_book_path, class: "md-button md-button--tonal" %>
+        <%= link_to "Search", search_books_path, class: "md-button md-button--tonal" %>
+      </div>
+    </header>
+
+    <%= render "books/page", book: @book %>
+
+    <nav class="babel-book__nav" aria-label="Adjacent books">
+      <%= link_to book_path(@book.previous.hex), class: "md-button md-button--outlined", rel: "prev" do %>
+        <span aria-hidden="true">&larr;</span> Previous
+      <% end %>
+      <%= link_to book_path(@book.next.hex), class: "md-button md-button--outlined", rel: "next" do %>
+        Next <span aria-hidden="true">&rarr;</span>
+      <% end %>
+    </nav>
+
+    <p class="babel-book__note">
+      The page above is a pure function of its address. Nothing is stored;
+      the same address always yields the same book. Adjacent addresses yield
+      unrelated pages, and every book has a neighbor in both directions.
+    </p>
+  </div>
+</section>
