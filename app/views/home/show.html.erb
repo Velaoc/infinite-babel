@@ -1,0 +1,33 @@
+<% title "The Infinite Library" %>
+<% description "Every hex address is a book. The Library of Babel, generated deterministically — nothing stored, everything reachable." %>
+
+<section class="md-hero babel-hero" aria-labelledby="hero-title">
+  <div class="md-hero__inner">
+    <div>
+      <p class="md-section__eyebrow">Infinite Babel</p>
+      <h1 id="hero-title">The library is total.</h1>
+      <p>
+        Every hex address is a book. A page of 4,100 characters is derived
+        from the address alone — never stored, always the same. Every possible
+        book exists; this is the door to all of them.
+      </p>
+      <div class="md-actions">
+        <%= link_to "Open a random book", random_book_path, class: "md-button md-button--filled" %>
+        <%= link_to "Search the library", search_books_path, class: "md-button md-button--outlined" %>
+      </div>
+    </div>
+    <div class="md-hero__art" aria-hidden="true"><div class="md-hero__orb"></div></div>
+  </div>
+</section>
+
+<section class="md-section" aria-labelledby="demo-title">
+  <div class="md-section__inner">
+    <p class="md-section__eyebrow">Volume <%= @book.hex_short %></p>
+    <h2 id="demo-title" class="md-section__heading">A page, drawn from nothing.</h2>
+    <p>This is the book at address <code><%= @book.hex %></code> — generated on demand, identical on every read.</p>
+    <%= render "books/page", book: @book %>
+    <div class="md-actions">
+      <%= link_to "Read this page", book_path(@book.hex), class: "md-button md-button--tonal" %>
+    </div>
+  </div>
+</section>
